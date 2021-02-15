@@ -1,0 +1,41 @@
+.corona_map{
+	display: flex;
+}
+.map{
+	/* position: absolute; */
+	z-index: 1;
+	flex: 7.5;
+}
+li{
+	list-style: none;
+}
+.search_list{
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 25px;
+	z-index: 20;
+	background-color: white;
+	width: 200px;
+	height: 200px;
+	top: 50px;
+}
+.confirmed_info{
+	margin-bottom: 10px;
+}
+.confirmed_date{
+	margin-bottom:5px;
+}
+.confirmed_place{
+	padding-left: 0;
+}
+.place{
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+.add_btn{
+	padding: 0;
+	margin: 0;
+}

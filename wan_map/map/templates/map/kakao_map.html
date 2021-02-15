@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Kakao 지도 시작하기</title>
+	<link rel="stylesheet" href="{% static 'css/kakao_map.css' %}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"></script>
+</head>
+
+<body>
+	<div class="kakao_map">
+		<div class="wrapper">
+			<form action="">
+				{% csrf_token %}
+				{{form.as_table }}
+				<i class="fas fa-search" onclick="keySearch()" ></i>
+			</form>
+			<ul class="category">
+				<li class="hospital">
+					<i class="fas fa-plus-square icon"></i>
+					<span>선별 진료소</span>
+				</li>
+				<li class="gps">
+					<i class="fas fa-map-marker-alt icon"></i><fa-3x></fa-3x>
+					<span>나의 위치</span>
+				</li>
+			</ul>
+		</div>
+		<div id="map" style="width:100vw;height:100vh;"></div>
+		
+	</div>
+	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aacb3fd43f1bd4cc57011f96fbec6d92&libraries=services"></script>
+	<script src="{% static 'js/patient_admin.js' %}"></script>
+</body>
+
+</html>

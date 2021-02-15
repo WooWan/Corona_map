@@ -1,0 +1,11 @@
+*{
+	/* margin: 0; */
+	padding: 0;
+}
+input{
+	margin: 0;
+}
+.patient_info{
+	margin-top:5px;
+	border-bottom: 1px solid grey;
+}
