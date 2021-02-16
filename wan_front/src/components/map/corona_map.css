@@ -39,3 +39,30 @@ li{
 	padding: 0;
 	margin: 0;
 }
+.patient_wrap{
+	/* position: relative;
+	left: 10px; */
+	background-color: white;
+	width: 190px;
+	height: 70px;
+	border-radius: 20px;
+	/* margin-left: 10px; */
+	/* padding-left: 10px; */
+}
+.patient_title_wrap{
+	background-color: lightblue;
+	height: 25px;
+}
+.patient_title{
+	/* position: relative;
+	left: 10px; */
+	/* background-color: lightgreen; */
+	margin-left: 10px;
+	height: 20px;
+	margin-bottom: 5px;
+}
+.patient_content{
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 13px;
+}
