@@ -1,35 +1,36 @@
 import './corona_map.css'
 import React, { useEffect, useState } from 'react';
-import DatePicker, {registerLocale} from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Patient_list from './patient_list';
 
 /*global kakao*/
-const Corona_Map = ({location, onSubmit, patients, delete_patient}) => {
+const Corona_Map = ({ location, onSubmit, patients, delete_patient }) => {
+	console.log(patients)
 	const [startDate, setStartDate] = useState(new Date());
-	const [place, setPlace] = useState({ name: '강남구청', jibun:'서울 강남구 삼성동 16-1', coordinate_y:'37.518944466469215', coordinate_x:'127.04700555285855' , phone:'02-3423-5114'})
-
-	const submit_patient=(event)=>{
+	const [place, setPlace] = useState({ name: '강남구청', jibun: '서울 강남구 삼성동 16-1', coordinate_y: '37.518944466469215', coordinate_x: '127.04700555285855', phone: '02-3423-5114' })
+	console.log(place)
+	const submit_patient = (event) => {
 		console.log(place)
 		onSubmit({
-			name:place.name,
-			date:getDate(),
+			name: place.name,
+			date: getDate(),
 			coordinate_y: place.coordinate_y,
 			coordinate_x: place.coordinate_x,
 			phone: place.phone
 		})
 	}
 
-	
-	const getDate=()=>{
+
+	const getDate = () => {
 		const year = startDate.getFullYear()
-		const month = startDate.getMonth()+1<10? '0'+(startDate.getMonth()+1) :startDate.getMonth()
-		const day = startDate.getDate()<10? '0'+startDate.getDate():startDate.getDate()
-		const temp=`${year}-${month}-${day}`;
+		const month = startDate.getMonth() + 1 < 10 ? '0' + (startDate.getMonth() + 1) : startDate.getMonth()
+		const day = startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate()
+		const temp = `${year}-${month}-${day}`;
 		return temp;
 	}
 
-	useEffect(() =>{
+	useEffect(() => {
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center: new kakao.maps.LatLng(37.518944466469215, 127.04700555285855), // 지도의 중심좌표
@@ -41,13 +42,13 @@ const Corona_Map = ({location, onSubmit, patients, delete_patient}) => {
 		// 장소 검색 객체를 생성합니다
 		var ps = new kakao.maps.services.Places();
 		//location: 검색한 장소
-		const search_key=location;
+		const search_key = location;
 		// 키워드로 장소를 검색합니다
 		ps.keywordSearch(search_key, placesSearchCB);
 		for (var i = 0; i < patients.length; i++) {
 			confirmed_marker(patients[i]);
 		}
-		
+		// console.log(place)
 		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 		function placesSearchCB(data, status, pagination) {
 			if (status === kakao.maps.services.Status.OK) {
@@ -60,8 +61,6 @@ const Corona_Map = ({location, onSubmit, patients, delete_patient}) => {
 
 		// 지도에 마커를 표시하는 함수입니다
 		function displayMarker(place) {
-			// setCoordinate({y:place.y, x:place.x});
-			// console.log(coordinate);
 			map.setCenter(new kakao.maps.LatLng(place.y, place.x));
 			var markerPosition = new kakao.maps.LatLng(place.y, place.x);
 
@@ -92,11 +91,11 @@ const Corona_Map = ({location, onSubmit, patients, delete_patient}) => {
 
 			var content = '<div class="patient_wrap">' +
 				'    <div class="info">' +
-				'	<div class="patient_title_wrap"> '+
+				'	<div class="patient_title_wrap"> ' +
 				`        <div class="patient_title">${place.place}</div>` +
-				'	</div>  '+
+				'	</div>  ' +
 				'        <div class="patient_body">' +
-				`			<div class="patient phone">전화번호: ${place.phone}</div> `+
+				`			<div class="patient phone">전화번호: ${place.phone}</div> ` +
 				'        </div>' +
 				'    </div>' +
 				'</div>';
@@ -114,19 +113,22 @@ const Corona_Map = ({location, onSubmit, patients, delete_patient}) => {
 				yAnchor: 1.5,
 			});
 		}
-		function getListItem(place) {
+		function getListItem(patient_place) {
+			console.log(patient_place)
+			console.log(place)
 			setPlace({
-				name:place.place_name,
-				jibun:place.address_name,
-				coordinate_y:place.y,
-				coordinate_x:place.x,
-				phone: place.phone
+				name: patient_place.place_name,
+				jibun: patient_place.address_name,
+				coordinate_y: patient_place.y,
+				coordinate_x: patient_place.x,
+				phone: patient_place.phone,
 			})
+			// console.log(place);
 		}
-	},[location,patients])
+	}, [location, patients])
 	return (
 		<div className="corona_map">
-			<div className="map" id="map" style={{ width: "100vw", height: "100vh" }} ></div>	
+			<div className="map" id="map" style={{ width: "100vw", height: "100vh" }} ></div>
 			<div className="search_list" id="search_list">
 				<h2 className="confirmed_info">확진자 정보</h2>
 				<h4 className="confirmed_date">방문일자</h4>
@@ -142,7 +144,7 @@ const Corona_Map = ({location, onSubmit, patients, delete_patient}) => {
 					<li>{place.jibun}</li>
 				</ul>
 				<input className="add_btn" type="submit" onClick={submit_patient} value="동선 추가하기" />
-				{patients.map(patient=>(
+				{patients.slice(patients.length-4,patients.length).map(patient => (
 					<Patient_list
 						key={patient.id}
 						patient={patient}

@@ -5,7 +5,7 @@ class Patients(models.Model):
 	date=models.DateField()
 	coordinate_y=models.FloatField(null=True)
 	coordinate_x = models.FloatField(null=True)
-	phone= models.CharField(max_length=20)
+	phone= models.CharField(max_length=20,blank=True, null=True)
 
 	def __str__(self):
 		return self.place

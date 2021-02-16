@@ -13,31 +13,31 @@ const rest = new Rest(instance);
 function AppLayOut() {
 	const [patients, setPatients] = useState([]);
 	const [location, setLocation] = useState('강남구청');
-	
+
 	useEffect(() => {
 		rest.get_patients()
 			.then(response => setPatients(response.data))
 	}, [rest])
-	const update_patients=()=>{
+	const update_patients = () => {
 		rest.get_patients()
 			.then(response => setPatients(response.data))
 		console.log(patients);
 	}
-	const submit_patient= useCallback(
-		(place)=>{
+	const submit_patient = useCallback(
+		(place) => {
 			console.log(place);
-			rest.post_patient(place.name, place.date, place.coordinate_y,place.coordinate_x, place.phone)
+			rest.post_patient(place.name, place.date, place.coordinate_y, place.coordinate_x, place.phone)
 			update_patients();
 		},
 		[rest],
 	)
-	const delete_patient=useCallback(
-		patient=> {
+	const delete_patient = useCallback(
+		patient => {
 			rest.delete_patient(patient);
 			update_patients();
-		},[rest],
+		}, [rest],
 	)
-	
+
 	const search = (query) => {
 		setLocation(query)
 	}
@@ -45,7 +45,7 @@ function AppLayOut() {
 	return (
 		<div className="main">
 			<Search_bar onSearch={search} />
-			<Corona_Map location={location} onSubmit={submit_patient} delete_patient={delete_patient} patients={patients.slice(patients.length-4,patients.lenth).reverse()}/>
+			<Corona_Map location={location} onSubmit={submit_patient} delete_patient={delete_patient} patients={patients} />
 		</div>
 
 	);
