@@ -2,13 +2,15 @@ class Rest{
 	constructor(rest_request){
 		this.rest=rest_request
 	}
-	post_patient=(place,date,coordinate_y, coordinate_x)=>{
+	post_patient=(place,date,coordinate_y, coordinate_x,phone)=>{
+		console.log(phone);
 		const response = this.rest.post('patients/',{
 			id:'111',
 			place:place,
 			date:date,
 			coordinate_y:coordinate_y,
 			coordinate_x: coordinate_x,
+			phone:phone,
 		})
 		return response;
 	}

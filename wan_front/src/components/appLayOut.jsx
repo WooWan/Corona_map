@@ -26,7 +26,7 @@ function AppLayOut() {
 	const submit_patient= useCallback(
 		(place)=>{
 			console.log(place);
-			rest.post_patient(place.name, place.date, place.coordinate_y,place.coordinate_x)
+			rest.post_patient(place.name, place.date, place.coordinate_y,place.coordinate_x, place.phone)
 			update_patients();
 		},
 		[rest],
@@ -34,7 +34,6 @@ function AppLayOut() {
 	const delete_patient=useCallback(
 		patient=> {
 			rest.delete_patient(patient);
-			console.log('delete')
 			update_patients();
 		},[rest],
 	)
