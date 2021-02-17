@@ -25,12 +25,12 @@ const Search_bar = (props) => {
 					<img src="/images/search.svg" alt="search" />
 				</button>
 			</div>
-			<ul class="category">
-				<li class="hospital">
+			<ul className="category">
+				<li className="hospital">
 					<img src="/images/hospital.svg" alt="hospital"/>
 					<span>선별 진료소</span>
 				</li>
-				<li class="gps">
+				<li className="gps">
 					<img src="/images/gps.svg" alt=""/>
 					<span>나의 위치</span>
 				</li>

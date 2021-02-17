@@ -1,0 +1,77 @@
+/* {
+	font-size: 100px;
+} */
+.main{
+	display: flex;
+	width: 100vw;
+}
+.corona_map{
+	/* width: 80vw; */
+	flex: 8;
+	width: 100%;
+}
+.header{
+	position: absolute;
+	z-index: 10;
+}
+
+.map{
+	/* position: absolute; */
+	z-index: 1;
+	/* flex: 7.5; */
+}
+li{
+	list-style: none;
+}
+.search_list{
+	flex: 2;
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 25px;
+	z-index: 20;
+	background-color: white;
+	width: 200px;
+	height: 200px;
+	top: 50px;
+}
+.confirmed_info{
+	margin-bottom: 10px;
+}
+.confirmed_date{
+	margin-bottom:5px;
+}
+.confirmed_place{
+	padding-left: 0;
+}
+.place{
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+.add_btn{
+	padding: 0;
+	margin: 0;
+}
+
+.patient_wrap{
+	background-color: white;
+	width: 190px;
+	height: 60px;
+	border-radius: 10px;
+}
+.patient_title_wrap{
+	background-color: lightblue;
+	/* margin-top: 5px; */
+	height: 25px;
+}
+.patient_title{
+	margin-left: 10px;
+	padding-top: 5px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.patient_body{
+	margin-top: 5px;
+	margin-left: 10px;
+}

@@ -10,7 +10,7 @@ import Root from './pages/root';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root axios={axios} />
+    <Root/>
   </React.StrictMode>,
   document.getElementById('root')
 );

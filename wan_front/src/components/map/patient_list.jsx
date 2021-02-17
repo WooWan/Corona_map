@@ -2,6 +2,7 @@ import React from 'react';
 import './patient_list.css'
 const Patient_list = ({patient,delete_patient}) => {
 	const onClick=()=>{
+		console.log(patient)
 		delete_patient(patient);
 	}
 	return (

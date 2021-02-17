@@ -5,30 +5,36 @@ import "react-datepicker/dist/react-datepicker.css";
 import Patient_list from './patient_list';
 
 /*global kakao*/
-const Corona_Map = ({ location, onSubmit, patients, delete_patient }) => {
-	console.log(patients)
+const Corona_Map = ({ location, update_patient, patients, delete_patient }) => {
 	const [startDate, setStartDate] = useState(new Date());
 	const [place, setPlace] = useState({ name: '강남구청', jibun: '서울 강남구 삼성동 16-1', coordinate_y: '37.518944466469215', coordinate_x: '127.04700555285855', phone: '02-3423-5114' })
-	console.log(place)
-	const submit_patient = (event) => {
-		console.log(place)
-		onSubmit({
+	const update=()=>{
+		console.log('update')
+		update_patient({
 			name: place.name,
-			date: getDate(),
 			coordinate_y: place.coordinate_y,
 			coordinate_x: place.coordinate_x,
 			phone: place.phone
-		})
+		});
 	}
+	// const submit_patient = (event) => {
+	// 	onSubmit({
+			// name: place.name,
+			// date: getDate(),
+			// coordinate_y: place.coordinate_y,
+			// coordinate_x: place.coordinate_x,
+			// phone: place.phone
+	// 	})
+	// }
 
 
-	const getDate = () => {
-		const year = startDate.getFullYear()
-		const month = startDate.getMonth() + 1 < 10 ? '0' + (startDate.getMonth() + 1) : startDate.getMonth()
-		const day = startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate()
-		const temp = `${year}-${month}-${day}`;
-		return temp;
-	}
+	// const getDate = () => {
+	// 	const year = startDate.getFullYear()
+	// 	const month = startDate.getMonth() + 1 < 10 ? '0' + (startDate.getMonth() + 1) : startDate.getMonth()
+	// 	const day = startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate()
+	// 	const temp = `${year}-${month}-${day}`;
+	// 	return temp;
+	// }
 
 	useEffect(() => {
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -114,8 +120,6 @@ const Corona_Map = ({ location, onSubmit, patients, delete_patient }) => {
 			});
 		}
 		function getListItem(patient_place) {
-			console.log(patient_place)
-			console.log(place)
 			setPlace({
 				name: patient_place.place_name,
 				jibun: patient_place.address_name,
@@ -123,13 +127,13 @@ const Corona_Map = ({ location, onSubmit, patients, delete_patient }) => {
 				coordinate_x: patient_place.x,
 				phone: patient_place.phone,
 			})
-			// console.log(place);
+			update(place);
 		}
-	}, [location, patients])
+	},[])
 	return (
 		<div className="corona_map">
-			<div className="map" id="map" style={{ width: "100vw", height: "100vh" }} ></div>
-			<div className="search_list" id="search_list">
+			<div className="map" id="map" style={{height: "100vh" }} ></div>
+			{/* <div className="search_list" id="search_list">
 				<h2 className="confirmed_info">확진자 정보</h2>
 				<h4 className="confirmed_date">방문일자</h4>
 				<DatePicker
@@ -151,7 +155,7 @@ const Corona_Map = ({ location, onSubmit, patients, delete_patient }) => {
 						delete_patient={delete_patient}
 					/>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 };
