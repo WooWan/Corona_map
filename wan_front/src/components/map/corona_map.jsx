@@ -6,6 +6,7 @@ import Patient_list from './patient_list';
 
 /*global kakao*/
 const Corona_Map = ({ location, update_patient, patients, delete_patient }) => {
+	console.log(location)
 	const [startDate, setStartDate] = useState(new Date());
 	const [place, setPlace] = useState({ name: '강남구청', jibun: '서울 강남구 삼성동 16-1', coordinate_y: '37.518944466469215', coordinate_x: '127.04700555285855', phone: '02-3423-5114' })
 	const update=()=>{
@@ -17,24 +18,6 @@ const Corona_Map = ({ location, update_patient, patients, delete_patient }) => {
 			phone: place.phone
 		});
 	}
-	// const submit_patient = (event) => {
-	// 	onSubmit({
-			// name: place.name,
-			// date: getDate(),
-			// coordinate_y: place.coordinate_y,
-			// coordinate_x: place.coordinate_x,
-			// phone: place.phone
-	// 	})
-	// }
-
-
-	// const getDate = () => {
-	// 	const year = startDate.getFullYear()
-	// 	const month = startDate.getMonth() + 1 < 10 ? '0' + (startDate.getMonth() + 1) : startDate.getMonth()
-	// 	const day = startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate()
-	// 	const temp = `${year}-${month}-${day}`;
-	// 	return temp;
-	// }
 
 	useEffect(() => {
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -56,7 +39,7 @@ const Corona_Map = ({ location, update_patient, patients, delete_patient }) => {
 		}
 		// console.log(place)
 		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-		function placesSearchCB(data, status, pagination) {
+		function placesSearchCB(data, status) {
 			if (status === kakao.maps.services.Status.OK) {
 				// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 				// console.log(data[0])
@@ -71,6 +54,7 @@ const Corona_Map = ({ location, update_patient, patients, delete_patient }) => {
 			var markerPosition = new kakao.maps.LatLng(place.y, place.x);
 
 			getListItem(place);
+			console.log(place)
 			var marker = new kakao.maps.Marker({
 				position: markerPosition
 			});
@@ -129,7 +113,7 @@ const Corona_Map = ({ location, update_patient, patients, delete_patient }) => {
 			})
 			update(place);
 		}
-	},[])
+	},[patients,location])
 	return (
 		<div className="corona_map">
 			<div className="map" id="map" style={{height: "100vh" }} ></div>

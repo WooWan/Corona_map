@@ -4,6 +4,7 @@ const Search_bar = (props) => {
 	const inputRef = useRef();
 	const handleSearch=()=>{
 		const value= inputRef.current.value;
+		console.log(value);
 		props.onSearch(value);
 		inputRef.current.value = '';
 	}
